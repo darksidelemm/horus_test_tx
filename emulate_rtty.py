@@ -45,6 +45,7 @@ def setup_rfm98w(frequency=434.650, spi_device=0, shutdown=False):
     lora.set_register(0x01,0x00) # Standby Mode
     # If we have been asked to shutdown the RFM98W, then exit here.
     if shutdown:
+        print("Transmitter shutdown.")
         sys.exit(0)
 
     # Otherwise, proceed.
@@ -101,10 +102,6 @@ if __name__ == '__main__':
 
     print("Initialising RFM98W transmitter...")
     setup_rfm98w(frequency=tx_freq, spi_device=args.spidevice, shutdown=args.shutdown)
-
-    if args.shutdown:
-        print("Transmitter Shutdown.")
-        sys.exit(0)
 
     print("Initialising Serial Port...")
     s = serial.Serial(args.serial_port, args.serial_baud, bytesize=serial.SEVENBITS, stopbits=serial.STOPBITS_TWO)
