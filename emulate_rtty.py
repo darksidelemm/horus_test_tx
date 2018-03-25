@@ -11,9 +11,6 @@
 #
 #	Uses spidev for comms with a RFM98W module.
 #
-#	Note: As with the RFM22B version, all this script does
-#	is get the RFM98W onto the right frequency, and into the right mode.
-#
 #	SPI: Connected to CE0 (like most of my LoRa shields)
 #	RPi TXD: Connected to RFM98W's DIO2 pin.
 #
@@ -104,6 +101,10 @@ if __name__ == '__main__':
 
     print("Initialising RFM98W transmitter...")
     setup_rfm98w(frequency=tx_freq, spi_device=args.spidevice, shutdown=args.shutdown)
+
+    if args.shutdown:
+        print("Transmitter Shutdown.")
+        sys.exit(0)
 
     print("Initialising Serial Port...")
     s = serial.Serial(args.serial_port, args.serial_baud, bytesize=serial.SEVENBITS, stopbits=serial.STOPBITS_TWO)

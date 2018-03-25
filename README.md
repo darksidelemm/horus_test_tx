@@ -6,8 +6,8 @@ These scripts are intended to be run on a Raspberry Pi, with a 'Wenet' shield (R
 
 
 ## Dependencies
-* horuslib (via the [horus_utils repository](https://github.com/projecthorus/horus_utils/))
-* [wenet](https://github.com/projecthorus/wenet) - Clone this repository to ~/, and follow the [TX setup instructions](https://github.com/projecthorus/wenet/wiki/Wenet-TX-Payload-Instructions#31-fsk-modulator) up to and including section 3.1.
+* horuslib (via the [horus_utils repository](https://github.com/projecthorus/horus_utils/)) - Follow the [Headless RPi instructions](https://github.com/projecthorus/horus_utils/wiki/3.-Headless-Raspberry-Pi-Operation), though don't do steps 13/14 (auto-start).
+* [wenet](https://github.com/projecthorus/wenet) - Clone this repository to ~/, and follow all the [TX setup instructions](https://github.com/projecthorus/wenet/wiki/Wenet-TX-Payload-Instructions#31-fsk-modulator) up to and including section 3.1.
 * [pySX127x](https://github.com/darksidelemm/pySX127x) - Clone this, and copy the entire SX127x subdirectory into this directory.
 
 ## Producing Telemetry
@@ -17,7 +17,7 @@ RTTY telemetry is transmitted with the following settings:
 * Framing: 7N2  (7 ASCII bits per character, 2 stop bits)
 * Tone Spacing: 470 Hz  (A limitation of the RFM98W's PLL Resolution)
 
-To transmit run:
+To transmit, run:
 ```
 $ sudo python tx_rtty.py
 ```
@@ -28,4 +28,16 @@ Run `python tx_rtty.py --help` to see what settings can be modified.
 TODO
 
 ### Wenet
-TODO  (essentially just run the tx_test_images.py script)
+Wenet test images are transmitted using default settings (115kbaud, 441.2 MHz, 50mW).
+
+To transmit, run:
+```
+$ ./tx_wenet.sh
+```
+CTRL-C exits.
+
+## Stopping Transmissions
+Some of the above scripts don't close the transmitter down cleanly. To shut-down the RFM98W, run:
+```
+$ ./shutdown_tx.sh
+```
