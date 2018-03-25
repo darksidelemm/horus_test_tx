@@ -19,13 +19,23 @@ RTTY telemetry is transmitted with the following settings:
 
 To transmit, run:
 ```
-$ sudo python tx_rtty.py
+$ ./tx_rtty.sh
 ```
 
-Run `python tx_rtty.py --help` to see what settings can be modified.
+Run `python emulate_rtty.py --help` to see what settings can be modified, and modify the `tx_rtty.sh` file as appropriate.
+
+CTRL-C exits.
 
 ### LoRa
-TODO
+LoRa telemetry is transmitted on 431.650 MHz by default. This can be changed in the `tx_lora.sh` file.
+
+To transmit, run:
+```
+$ ./tx_lora.sh
+```
+
+In this case, CTRL-C will only kill the bit of code which generates packets, not the 'LoRaUDPServer' process which handles communications with the RFM98W module. To kill this process, run `sudo killall python`.
+
 
 ### Wenet
 Wenet test images are transmitted using default settings (115kbaud, 441.2 MHz, 50mW).
